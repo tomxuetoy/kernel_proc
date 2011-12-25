@@ -21,7 +21,7 @@ struct proc_dir_entry *Our_Proc_File;
  * =========
  * 1. The buffer where the data is to be inserted, if
  *    you decide to use it.
- * 2. A pointer to a pointer to characters. This is
+ * 2. A pointer to a pointer to characters. This is	//指针的指针, by Tom Xue
  *    useful if you don't want to use the buffer
  *    allocated by the kernel.
  * 3. The current position in the file
@@ -43,7 +43,7 @@ struct proc_dir_entry *Our_Proc_File;
  * code which used it. I just looked to see what uses
  * the get_info field of proc_dir_entry struct (I used a
  * combination of find and grep, if you're interested),
- * and I saw that  it is used in <kernel source
+ * and I saw that it is used in <kernel source
  * directory>/fs/proc/array.c.
  *
  * If something is unknown about the kernel, this is
@@ -54,7 +54,7 @@ struct proc_dir_entry *Our_Proc_File;
 int
 procfile_read(char *buffer,
 	      char **buffer_location,
-	      off_t offset, int buffer_length, int *eof, void *data) //the real called func, by Tom Xue
+	      off_t offset, int buffer_length, int *eof, void *data) //refer to proc_dir_entry->read_proc(read_proc_t), by Tom Xue
 {
 	int ret;
 	
@@ -72,7 +72,7 @@ procfile_read(char *buffer,
 	 * buffer is filled.
 	 */
 	if (offset > 0) {
-		/* we have finished to read, return 0 */
+		/* we have finished to read, return 0 解释在上面, by Tom Xue */
 		ret  = 0;
 	} else {
 		/* fill the buffer, return the buffer size */
