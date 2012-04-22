@@ -72,12 +72,15 @@ procfile_read(char *buffer,
 	 * buffer is filled.
 	 */
 	if (offset > 0) {
-		/* we have finished to read, return 0 解释在上面, by Tom Xue */
+        printk(KERN_ALERT "offset = %d\n", offset);     //step 2: offset = 12, after "HellowWorld!" was written into the buffer
+                                                        //step 4: while "HelloWorld!" was sending to screen(a longer process), this branch was executed again
+		/* we have finished to read, return 0 解释在上面: The current position in the file, by Tom Xue */
 		ret  = 0;
 	} else {
+        printk(KERN_ALERT "offset = %d\n", offset);     //step 1: offset = 0, at first there is nothing in the buffer
 		/* fill the buffer, return the buffer size */
 		//proc_register -> proc_file_operations -> read -> proc_file_read -> __proc_file_read -> read_proc, n -= copy_to_user(buf, start < page ? page : start, n);
-		ret = sprintf(buffer, "HelloWorld!\n"); //read_proc will read
+		ret = sprintf(buffer, "HelloWorld!\n");         //step 3: "HelloWorld!" was printed out to screen, read_proc will read
 	}
 
 	return ret;

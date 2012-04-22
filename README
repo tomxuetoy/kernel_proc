@@ -1,0 +1,35 @@
+procfs1.c:
+    BB_Ubuntu
+        root@omap:/home/ubuntu/tom# insmod procfs1.ko
+        ...
+        root@omap:/home/ubuntu/tom# dmesg | tail
+        [11685.157745] /proc/helloworld created
+        
+        root@omap:/home/ubuntu/tom# cat /proc/helloworld                                                                                                                                                                   
+        [11706.272399] offset = 0
+        [11706.274993] offset = 12
+        HelloWorld![11706.280181] offset = 12
+
+        root@omap:/home/ubuntu/tom# rmmod procfs1.ko 
+        root@omap:/home/ubuntu/tom# dmesg | tail                                                                                                                                                                  
+        ...
+        [11685.157745] /proc/helloworld created
+        [11706.272369] procfile_read (/proc/helloworld) called
+        [11706.272399] offset = 0
+        [11706.274963] procfile_read (/proc/helloworld) called
+        [11706.274993] offset = 12
+        [11706.280151] procfile_read (/proc/helloworld) called
+        [11706.280181] offset = 12
+        [11712.929077] /proc/helloworld removed
+
+
+
+
+proc_test.c: a simpler one, written by Tom Xue
+    BB_Ubuntu
+        root@omap:/home/ubuntu/tom# dmesg | grep Tom
+        ...
+        [13545.781250] Tom Xue start to create_proc_read_entry
+        [13545.787475] create_proc_read_entry OK, Tom Xue!
+        [13547.031005] Good bye, my_proc, Tom Xue!
+
