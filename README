@@ -33,3 +33,13 @@ proc_test.c: a simpler one, written by Tom Xue
         [13545.787475] create_proc_read_entry OK, Tom Xue!
         [13547.031005] Good bye, my_proc, Tom Xue!
 
+
+Compile on BB:
+    Makefile
+        obj-m += procfs1.o
+        obj-m += proc_test.o
+
+    Compile:
+        sudo make -j1 ARCH=arm LOCALVERSION=-x3 -C kernel M=$(pwd) modules
+        kernel above is the path of kernel source code
+        C source codes are on the parent directory of kernel
